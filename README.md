@@ -1,5 +1,5 @@
 # Emulation
-## emulate
+## emulate(emulatorid,filetoload)
 Run selected emulator (set with emucore()) with an optional command/rom/binary.
 NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.
 
@@ -7,19 +7,19 @@ NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LO
 emucore('snes9x')
 emulate(-1, 'topgear.sfc') 
 ```
-## emucore
+## emucore(fnameNoExt)
 specify the emulator core to use with emulate() commmands
 
 ```lua
 emucore("mame") -- needs mame.dll
 ```
-## getmem
+## getmem(emulatorid,bank,offset,numbytes)
 get memory data from emulator
 
-## memsize
+## memsize(emulatorid,bank)
 get size of memory from emulator
 
-## setmem
+## setmem(emulatorid,bank,offset,binStr)
 change emulator memory data
 
 ```lua
@@ -30,19 +30,19 @@ str = "123456789"
 -- (this was tested on vice-libretro)
 setmem(emuN, bank, offset, str)
 ```
-## emuopt
+## emuopt(emulatorid,property,value)
 
-## insert
+## insert(emulatorid,drivenum,dskfile)
 
-## eject
+## eject(emulatorid,drivenum)
 
-## sendtext
+## sendtext(emulatorid,text)
 
-## sendkeys
+## sendkeys(emulatorid,keys)
 
-## holdkey
+## holdkey(emulatorid, key, duration)
 
-## releasekey
+## releasekey(emulatorid, key)
 
 # Models and Positioning
 ## rez
@@ -54,64 +54,66 @@ rez('mymodel.3ds')
 ```lua
 local mynodeid = rez('myhouse.obj')
 ```
-## sel
+## sel(nodeid)
 
-## sky
+## sky(skyboxTexture,)
 
-## put
+## put(property, value1, value2..)
 
-## parent
+## parent(nodeid)
 
-## pos
+## pos(x, y, z)
 
-## scale
+## scale(xscl, yscl, zscl)
 
-## rot
+## rot(x, y, z)
 
 ## mesh
 
-## node
+## node(meshid)
 
 ## pointlight
 
 ## dirlight
 
-## texture
+## texture(fname)
 
-## line3dex
+## line3dex(x1,y1,z1,x2,y2,z2,clr)
 
-## line3d
+## line3d(x1,y1,z1,x2,y2,z2,clr)
 
-## get
+## get(property)
 
-## lookat
+## lookat(x,y,z)
 
 # Flow Control
-## wait
+## wait(ms, funcname)
+wait X milliseconds and then run a function by name
 
-## on
-
-## wait
+```lua
+wait(1000, "myFunction")
+```
+## on(event, funcname)
 
 # Physics
-## force
+## force()
 
-## impulse
+## impulse()
 
 # User Interface
-## screeninp
+## screeninp(noneOrConsOrEmu)
 
-## print
+## print(arg1,arg2..)
 
-## cls
+## cls()
 
-## screen
+## screen()
 
-## screenon
+## screenon(selsecreen)
 
-## palette
+## palette(color,r,g,b,a)
 
-## screeninp
+## screeninp(noneOrConsOrEmu)
 
-## showscreen
+## showscreen(num)
 
