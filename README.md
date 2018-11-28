@@ -1,11 +1,11 @@
 # Emulation
 ## emulate(emulatorid,filetoload)
 Run selected emulator (set with emucore()) with an optional command/rom/binary.
-NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.
+NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.  You may run the same core multiple times simultaneously or several different cores depending on system resources.
 
 ```lua
 emucore('snes9x')
-emulate(-1, 'topgear.sfc') 
+emulatorid = emulate(-1, 'topgear.sfc') 
 ```
 ## emucore(fnameNoExt)
 specify the emulator core to use with emulate() commmands
@@ -14,7 +14,7 @@ specify the emulator core to use with emulate() commmands
 emucore("mame") -- needs mame.dll
 ```
 ## getmem(emulatorid,bank,offset,numbytes)
-get memory data from emulator
+get memory data from emulator; returns a lua string
 
 ## memsize(emulatorid,bank)
 get size of memory from emulator
@@ -31,10 +31,13 @@ str = "123456789"
 setmem(emuN, bank, offset, str)
 ```
 ## emuopt(emulatorid,property,value)
+specify emulator option
 
 ## insert(emulatorid,drivenum,dskfile)
+insert virtual disk into emulator drive
 
 ## eject(emulatorid,drivenum)
+eject disk from virtual emulator drive
 
 ## sendtext(emulatorid,text)
 
@@ -55,21 +58,43 @@ rez('mymodel.3ds')
 local mynodeid = rez('myhouse.obj')
 ```
 ## sel(nodeid)
+change selected node which subsequent commands like pos() and rot() affect
 
-## sky(skyboxTexture,)
+## sky(skydomeTextureFname,texturePerc, spherePerc, radius)
+create a sky dome; texturePerc=0..1, spherePerc=0..2
 
 ## put(property, value1, value2..)
 
 ## parent(nodeid)
+make the selected node a child of nodeid
 
 ## pos(x, y, z)
+move the currently selected node
 
 ## scale(xscl, yscl, zscl)
+scale the currently selected node
 
 ## rot(x, y, z)
+rotate the currently selected node
 
-## mesh
+## mesh(indices, vertices)
+create a mesh from the specified tables
 
+```lua
+  c = { r=255, g=255, b=255, a=255 }
+  v = { { pos = {x=0,y=0,z=0}, color=c, 
+         texturecoords = {u=0, v=0},
+         normal = {x=0,y=1,z=0} },
+       { pos = {x=10,y=0,z=0}, color=c, 
+         texturecoords = {u=0, v=1},
+         normal = {x=0,y=1,z=0} },
+       { pos = {x=0,y=0,z=10}, color=c,  
+         texturecoords = {u=0, v=0},
+         normal = {x=0,y=1,z=0} } }
+  i = {1,2,3}
+  meshid=mesh(i,v)
+  id=node(meshid)
+```
 ## node(meshid)
 
 ## pointlight
@@ -87,14 +112,24 @@ local mynodeid = rez('myhouse.obj')
 ## lookat(x,y,z)
 
 # Flow Control
-## wait(ms, funcname)
+## wait(ms, funcname, repeat)
 wait X milliseconds and then run a function by name
 
 ```lua
 wait(1000, "myFunction")
 ```
+```lua
+wait(20, "funcRepeats", "repeat")
+```
 ## on(event, funcname)
+call a handler on event trigger
 
+```lua
+on("keydown", "mykeyhandler"
+```
+```lua
+on("mousedownobj", "mynodeclickhandler")
+```
 # Physics
 ## force()
 
@@ -107,11 +142,14 @@ wait(1000, "myFunction")
 
 ## cls()
 
-## screen()
+## screen(num)
+create a new screen or switch to an existing; print() and palette() affect this screen
 
-## screenon(selsecreen)
+## screenon(nodeid)
+apply the screen as a texture to a node
 
 ## palette(color,r,g,b,a)
+change color values at index
 
 ## screeninp(noneOrConsOrEmu)
 
