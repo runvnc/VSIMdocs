@@ -3,7 +3,7 @@
 Run selected emulator (set with emucore()) with an optional command/rom/binary.
 NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.  You may run the same core multiple times simultaneously or several different cores depending on system resources.
 
-run Top Gear SNES game
+### run Top Gear SNES game
 ```lua
 emucore('snes9x')
 emulatorid = emulate(-1, 'topgear.sfc') 
@@ -11,7 +11,7 @@ emulatorid = emulate(-1, 'topgear.sfc')
 ## emucore(fnameNoExt)
 specify the emulator core to use with emulate() commmands
 
-next emulate() with MAME core
+### next emulate() with MAME core
 ```lua
 emucore("mame") -- needs mame.dll
 ```
@@ -24,7 +24,7 @@ get size of memory from emulator
 ## setmem(emulatorid,bank,offset,binStr)
 change emulator memory data
 
-show some numbers at top of C64 screen
+### show some numbers at top of C64 screen
 ```lua
 emuN = 0
 bank = 2
@@ -83,7 +83,7 @@ rotate the currently selected node
 ## mesh(indices, vertices)
 create a mesh from the specified tables
 
-create a simple triangle mesh and a node from it
+### create a simple triangle mesh and a node from it
 ```lua
   c = { r=255, g=255, b=255, a=255 }
   v = { { pos = {x=0,y=0,z=0}, color=c, 
@@ -122,7 +122,7 @@ wait X milliseconds and then run a function by name
 ```lua
 wait(1000, "myFunction")
 ```
-calls funcRepeats() approx. every 20 ms
+### calls funcRepeats() approx. every 20 ms
 ```lua
 wait(20, "funcRepeats", "repeat")
 ```
