@@ -134,10 +134,10 @@ flow.wait(20, "funcRepeats", "repeat")
 call a handler on event trigger
 
 ```lua
-on("keydown", "mykeyhandler"
+flow.on("keydown", "mykeyhandler"
 ```
 ```lua
-on("mousedownobj", "mynodeclickhandler")
+flow.on("mousedownobj", "mynodeclickhandler")
 ```
 # Physics
 ## physics.force()
