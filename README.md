@@ -5,15 +5,15 @@ NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LO
 
 ### run Top Gear SNES game
 ```lua
-emucore('snes9x')
-emulatorid = emulate(-1, 'topgear.sfc') 
+emu.emucore('snes9x')
+emulatorid = emu.emulate(-1, 'topgear.sfc') 
 ```
 ## emu.core(fnameNoExt)
 specify the emulator core to use with emulate() commmands
 
 ### next emulate() with MAME core
 ```lua
-emucore("mame") -- needs mame.dll
+emu.emucore("mame") -- needs mame.dll
 ```
 ## emu.getmem(emulatorid,bank,offset,numbytes)
 get memory data from emulator; returns a lua string
@@ -31,7 +31,7 @@ bank = 2
 offset = 1024 -- C64 screen mem start
 str = "123456789"
 -- (this was tested on vice-libretro)
-setmem(emuN, bank, offset, str)
+emu.setmem(emuN, bank, offset, str)
 ```
 ## emu.opt(emulatorid,property,value)
 specify emulator option
@@ -50,15 +50,21 @@ eject disk from virtual emulator drive
 
 ## emu.releasekey(emulatorid, key)
 
+## emu.delete(emulatorid)
+delete emulator and node
+
+## emu.full(emulatorid)
+run emulator in the full window
+
 # Models and Positioning
 ## model.rez
 Rez (instantiate) a 3d model (3ds dae xml x mdl lwo obj mesh bsp md2 md3 stl ply) NOTE: Not all models are compatible. YMMV.
 
 ```lua
-rez('mymodel.3ds')
+model.rez('mymodel.3ds')
 ```
 ```lua
-local mynodeid = rez('myhouse.obj')
+local mynodeid = model.rez('myhouse.obj')
 ```
 ## model.sel(nodeid)
 change selected node which subsequent commands like pos() and rot() affect
@@ -96,8 +102,8 @@ create a mesh from the specified tables
          texturecoords = {u=0, v=0},
          normal = {x=0,y=1,z=0} } }
   i = {1,2,3}
-  meshid=mesh(i,v)
-  id=node(meshid)
+  meshid=model.mesh(i,v)
+  id=model.node(meshid)
 ```
 ## model.node(meshid)
 
@@ -118,11 +124,11 @@ create a mesh from the specified tables
 wait X milliseconds and then run a function by name
 
 ```lua
-wait(1000, "myFunction")
+flow.wait(1000, "myFunction")
 ```
 ### calls funcRepeats() approx. every 20 ms
 ```lua
-wait(20, "funcRepeats", "repeat")
+flow.wait(20, "funcRepeats", "repeat")
 ```
 ## flow.on(event, funcname)
 call a handler on event trigger
@@ -139,6 +145,25 @@ on("mousedownobj", "mynodeclickhandler")
 ## physics.impulse()
 
 # User Interface
+## ui.screeninp(noneOrConsOrEmu)
+
+## print(arg1,arg2..)
+
+## ui.cls()
+
+## ui.screen(num)
+create a new screen or switch to an existing; print() and palette() affect this screen
+
+## ui.screenon(nodeid)
+apply the screen as a texture to a node
+
+## ui.palette(index,r,g,b,a)
+change color values at index
+
+## ui.screeninp(noneOrConsOrEmu)
+
+## ui.showscreen(num)
+
 # Networking
 ## net.geturl(url)
 
