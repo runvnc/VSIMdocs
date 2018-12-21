@@ -33,22 +33,23 @@ str = "123456789"
 -- (this was tested on vice-libretro)
 emu.setmem(emuN, bank, offset, str)
 ```
+## emu.reset(emulatorid)
+reset emulator machine
+
 ## emu.opt(emulatorid,property,value)
 specify emulator option
+
+## vsim_pause
+set this emu option to true to pause emulation
+
+## vsim_3daudio
+set this emu option to true to turn on positional audio from emulator
 
 ## emu.insert(emulatorid,drivenum,dskfile)
 insert virtual disk into emulator drive
 
 ## emu.eject(emulatorid,drivenum)
 eject disk from virtual emulator drive
-
-## emu.sendtext(emulatorid,text)
-
-## emu.sendkeys(emulatorid,keys)
-
-## emu.holdkey(emulatorid, key, duration)
-
-## emu.releasekey(emulatorid, key)
 
 ## emu.delete(emulatorid)
 delete emulator and node
@@ -72,6 +73,12 @@ change selected node which subsequent commands like pos() and rot() affect
 ## model.sky(skydomeTextureFname,texturePerc, spherePerc, radius)
 create a sky dome; texturePerc=0..1, spherePerc=0..2
 
+## VSIM_AMBIENT
+set this variable on any node to change ambient light color of entire scene
+
+```lua
+put('VSIM_AMBIENT', 255,95, 95, 95)
+```
 ## model.put(property, value1, value2..)
 
 ## model.parent(nodeid)
@@ -107,17 +114,24 @@ create a mesh from the specified tables
 ```
 ## model.node(meshid)
 
-## model.pointlight
+## model.pointlight(r, g, b, radius)
+add a point light; rgb 0..1
 
-## model.texture(fname)
+## model.texture(imgfname)
+apply an image as a texture to a node
 
 ## model.line3dex(x1,y1,z1,x2,y2,z2,clr)
 
 ## model.line3d(x1,y1,z1,x2,y2,z2,clr)
 
 ## model.get(property)
+get attribute value of selected node
 
 ## model.lookat(x,y,z)
+aim the camera at a position
+
+## model.siton(nodeid)
+position and look direction of selected node becomes relative to nodeid
 
 # Flow Control
 ## flow.wait(ms, funcname, repeat)
@@ -134,7 +148,7 @@ flow.wait(20, "funcRepeats", "repeat")
 call a handler on event trigger
 
 ```lua
-flow.on("keydown", "mykeyhandler"
+flow.on("keydown", "mykeyhandler")
 ```
 ```lua
 flow.on("mousedownobj", "mynodeclickhandler")
@@ -155,8 +169,26 @@ flow.on("mousedownobj", "mynodeclickhandler")
 create a new screen or switch to an existing; print() and palette() affect this screen
 
 ## ui.screenon(nodeid)
-apply the screen as a texture to a node
+apply emu or ui screen as a texture to a node
 
+### texture a node with an emulator screen
+```lua
+geom = require 'geom'
+require 'utils'
+i,v = geom.face2(0.5,0.5,1,0,0,0)
+screenMesh = model.mesh(i,v)
+screen = model.node(screenMesh)
+model.pos(0,-5,0)
+model.rot(0,0,90)
+model.scale(10,10,10)
+rtype = emucmd('cores/mamenew', 'rtype2')
+model.scale(0.0001, 0.0001, 0.0001)
+function emustarted(which)
+  model.sel(screen)
+  ui.screenon(rtype)
+end
+flow.wait(2000, 'emustarted')
+```
 ## ui.palette(index,r,g,b,a)
 change color values at index
 
@@ -168,4 +200,11 @@ change color values at index
 ## net.geturl(url)
 
 ## net.saveurl(url, fname)
+
+# Utilities
+## dir(glob)
+List files in directory
+
+## emucmd(core, argswspaces)
+run a .cmd that simulates cmd-line for emulator
 
