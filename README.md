@@ -113,6 +113,7 @@ create a mesh from the specified tables
   id=model.node(meshid)
 ```
 ## model.node(meshid)
+add a scene node based on a mesh
 
 ## model.pointlight(r, g, b, radius)
 add a point light; rgb 0..1
@@ -121,8 +122,10 @@ add a point light; rgb 0..1
 apply an image as a texture to a node
 
 ## model.line3dex(x1,y1,z1,x2,y2,z2,clr)
+add a 3d line with thickness
 
 ## model.line3d(x1,y1,z1,x2,y2,z2,clr)
+add a 3d line
 
 ## model.get(property)
 get attribute value of selected node
@@ -154,12 +157,18 @@ flow.on("keydown", "mykeyhandler")
 flow.on("mousedownobj", "mynodeclickhandler")
 ```
 # Physics
-## physics.force()
+## physics.force(fx,fy,fz,px,py,pz)
+add a force w/dir (fx,fy,fz) and rel. pos (px,py,pz)
 
-## physics.impulse()
+## physics.impulse((fx,fx,yz,px,py,pz)
+apply an impulse given direction and relative position
 
 # User Interface
-## ui.screeninp(noneOrConsOrEmu)
+## ui.screeninp(which)
+keys used for movement (0), console (1) or emulator(2+)
+
+## flow.waitui()
+wait for UI to process all lua commands
 
 ## print(arg1,arg2..)
 
@@ -189,17 +198,30 @@ function emustarted(which)
 end
 flow.wait(2000, 'emustarted')
 ```
+### write some text on a mesh/node
+```lua
+geom = require 'geom'
+i,v = geom.face2(5,5,0,0,0)
+labelMesh = model.mesh(i,v)
+lblnode = model.node(labelMesh)
+ui.screen()
+print("Text on node")
+flow.waitui()
+ui.screenon()
+ui.screen(0)
+```
 ## ui.palette(index,r,g,b,a)
 change color values at index
 
-## ui.screeninp(noneOrConsOrEmu)
-
 ## ui.showscreen(num)
+show console (1) or hide (0)
 
 # Networking
-## net.geturl(url)
+## net.geturl(url, callback)
+HTTP GET and return response body to callback function
 
 ## net.saveurl(url, fname)
+HTTP GET and save response to fname
 
 # Utilities
 ## dir(glob)
