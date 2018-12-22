@@ -40,10 +40,10 @@ reset emulator machine
 specify emulator option
 
 ## vsim_pause
-set this emu option to true to pause emulation
+set this emu option to string "true" to pause emulation
 
 ## vsim_3daudio
-set this emu option to true to turn on positional audio from emulator
+set this emu option to string "true" to turn on positional audio from emulator
 
 ## emu.insert(emulatorid,drivenum,dskfile)
 insert virtual disk into emulator drive
@@ -156,6 +156,47 @@ flow.on("keydown", "mykeyhandler")
 ```lua
 flow.on("mousedownobj", "mynodeclickhandler")
 ```
+### Menu example
+```lua
+require 'utils'
+function menukey(code, char) 
+  if handler ~= nil then handler(char) end
+end
+function firstMenu()
+  ui.cls()
+  ui.palette(2,255,255,255,255)
+  ui.showscreen(1)
+  print("Press key to select an option:")
+  print('1) Option The First')
+  print('2) Option The Second')
+  print('3) Cancel')
+  handler = secondMenu
+end
+function secondMenu(opt)
+ if (opt == "3") then
+    print("Cancel")
+    handler = nil
+    return
+  end
+  print("You selected "..opt)
+ 
+  print("Press key to select a suboption")
+  print("1) Option A")
+  print("2) Option B")
+  handler = thirdMenu
+end
+function thirdMenu(opt)
+  print("You selected suboption "..opt)
+  print("Thank you for your input.")
+  handler = nil
+end
+function menutest()
+ firstMenu()
+end
+flow.on('keydown', 'menukey')
+ 
+menutest()
+```
 # Physics
 ## physics.force(fx,fy,fz,px,py,pz)
 add a force w/dir (fx,fy,fz) and rel. pos (px,py,pz)
@@ -224,9 +265,9 @@ HTTP GET and return response body to callback function
 HTTP GET and save response to fname
 
 # Utilities
-## dir(glob)
-List files in directory
-
 ## emucmd(core, argswspaces)
 run a .cmd that simulates cmd-line for emulator
+
+## dir(glob)
+List files in directory
 
