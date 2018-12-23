@@ -140,6 +140,9 @@ aim the camera at a position
 ## model.siton(nodeid)
 position and look direction of selected node becomes relative to nodeid
 
+## model.fly(x1,y1,z1,x2,y2,z2,loop,repeat)
+animate selected node; loop/repeat string "true" or "false"
+
 # Flow Control
 ## flow.wait(ms, funcname, repeat)
 wait X milliseconds and then run a function by name
@@ -265,7 +268,7 @@ show console (1) or hide (0)
 ## net.geturl(url, callback)
 HTTP GET and return response body to callback function
 
-## net.saveurl(url, fname)
+## net.saveurl(url, fname, callback)
 HTTP GET and save response to fname
 
 # Utilities
