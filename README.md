@@ -80,6 +80,10 @@ set this variable on any node to change ambient light color of entire scene
 put('VSIM_AMBIENT', 255,95, 95, 95)
 ```
 ## model.put(property, value1, value2..)
+set an attribute on a node or the system
+
+## VSIM_DBG_MSGS
+set this attribute on any node to string "true" to show VSIM internal messages in STDOUT
 
 ## model.parent(nodeid)
 make the selected node a child of nodeid
@@ -270,4 +274,8 @@ run a .cmd that simulates cmd-line for emulator
 
 ## dir(glob)
 List files in directory
+
+# 7-zip compression and decompression
+## unzip(fname)
+unzip a file (uses 7-Zip, LGPL, www.7-zip.org)
 
