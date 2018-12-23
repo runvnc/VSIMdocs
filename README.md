@@ -1,11 +1,11 @@
 # Emulation
 ## emu.emulate(emulatorid,filetoload)
-Run selected emulator (set with emucore()) with an optional command/rom/binary.
+Run selected emulator (set with emu.core()) with an optional command/rom/binary.
 NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.  You may run the same core multiple times simultaneously or several different cores depending on system resources.
 
 ### run Top Gear SNES game
 ```lua
-emu.emucore('snes9x')
+emu.core('snes9x')
 emulatorid = emu.emulate(-1, 'topgear.sfc') 
 ```
 ## emu.core(fnameNoExt)
@@ -13,7 +13,7 @@ specify the emulator core to use with emulate() commmands
 
 ### next emulate() with MAME core
 ```lua
-emu.emucore("mame") -- needs mame.dll
+emu.core("mame") -- needs mame.dll
 ```
 ## emu.getmem(emulatorid,bank,offset,numbytes)
 get memory data from emulator; returns a lua string
