@@ -211,6 +211,13 @@ add a force w/dir (fx,fy,fz) and rel. pos (px,py,pz)
 ## physics.impulse((fx,fx,yz,px,py,pz)
 apply an impulse given direction and relative position
 
+## collision
+Enable collisions by setting this attribute
+
+```lua
+model.put("collision", "gimpact")
+model.put("massinertia",5,0,0,0)
+```
 # User Interface
 ## ui.screeninp(which)
 keys used for movement (0), console (1) or emulator(2+)
