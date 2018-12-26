@@ -297,8 +297,8 @@ unzip a file (uses 7-Zip, LGPL, www.7-zip.org)
 
 # love 2D engine
 ## lovewait(plugindir)
-run a love program from vsimroot/lua/<plugindir>/main.lua and return the stdout as a string
+run a love program from vsimroot/lua/plugindir/main.lua and return the stdout as a string
 
 ## love(plugindir)
-run a love program from vsimroot/lua/<plugindir>/main.lua in the background i.e. dont wait for it to finish
+run a love program from vsimroot/lua/plugindir/main.lua in the background i.e. dont wait for it to finish
 
