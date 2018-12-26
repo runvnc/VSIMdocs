@@ -70,6 +70,9 @@ local mynodeid = model.rez('myhouse.obj')
 ## model.sel(nodeid)
 change selected node which subsequent commands like pos() and rot() affect
 
+## VSIM_CAST_SHADOW
+(model.put "true"): selected node casts a shadow (does not work on high-poly meshes
+
 ## model.sky(skydomeTextureFname,texturePerc, spherePerc, radius)
 create a sky dome; texturePerc=0..1, spherePerc=0..2
 
@@ -122,8 +125,8 @@ add a scene node based on a mesh
 ## model.pointlight(r, g, b, radius)
 add a point light; rgb 0..1
 
-## model.texture(imgfname)
-apply an image as a texture to a node
+## model.texture(imgfname, [n]
+apply an image as a texture to a node; optional texture num n
 
 ## model.line3dex(x1,y1,z1,x2,y2,z2,clr)
 add a 3d line with thickness
@@ -229,6 +232,9 @@ wait for UI to process all lua commands
 
 ## ui.cls()
 
+## VSIM_OVERLAY
+set w/model.put on any node to png filename to change the overlay image
+
 ## ui.screen(num)
 create a new screen or switch to an existing; print() and palette() affect this screen
 
@@ -288,4 +294,11 @@ List files in directory
 # 7-zip compression and decompression
 ## unzip(fname)
 unzip a file (uses 7-Zip, LGPL, www.7-zip.org)
+
+# love 2D engine
+## lovewait(plugindir)
+run a love program from vsimroot/lua/<plugindir>/main.lua and return the stdout as a string
+
+## love(plugindir)
+run a love program from vsimroot/lua/<plugindir>/main.lua in the background i.e. dont wait for it to finish
 
