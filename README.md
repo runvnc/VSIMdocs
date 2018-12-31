@@ -1,3 +1,10 @@
+# Plugins
+## Installing Plugins
+To install a plugin press F5, paste in the plugin URL with Control-V, then hit ENTER.  You will need to restart the program before the plugin will be active.
+
+## Creating Plugins
+To create a plugin, first make a directory in [VSIM root]/lua/ Plugins can contain files and/or lua code in init.lua.  You can test your plugin by adding it to the list in the [VSIM root]/plugins file and restarting VSIM.  When it is ready open the console and type plugin_makezip(mydir)[ENTER] where mydir is the subdirectory of [VSIM root]/lua/.  It will create a zip file in [VSIM root]/lua/plugins/forupload which you can upload to your host.  Then just share the URL for your plugin. 
+
 # Emulation
 ## emu.emulate(emulatorid,filetoload)
 Run selected emulator (set with emu.core()) with an optional command/rom/binary.
@@ -283,6 +290,13 @@ HTTP GET and return response body to callback function
 
 ## net.saveurl(url, fname, callback)
 HTTP GET and save response to fname
+
+# Plugins
+## Installing Plugins
+To install a plugin press F5, paste in the plugin URL with Control-V, then hit ENTER.  You will need to restart the program before the plugin will be active.
+
+## Creating Plugins
+To create a plugin, first make a directory in [VSIM root]/lua/ Plugins can contain files and/or lua code in init.lua.  You can test your plugin by adding it to the list in the [VSIM root]/plugins file and restarting VSIM.  When it is ready open the console and type plugin_makezip(mydir)[ENTER] where mydir is the subdirectory of [VSIM root]/lua/.  It will create a zip file in [VSIM root]/lua/plugins/forupload which you can upload to your host.  Then just share the URL for your plugin. 
 
 # Utilities
 ## emucmd(core, argswspaces)
