@@ -150,7 +150,7 @@ aim the camera at a position
 ## model.siton(nodeid)
 position and look direction of selected node becomes relative to nodeid
 
-## model.fly(x1,y1,z1,x2,y2,z2,loop,repeat)
+## model.fly(x1,y1,z1,x2,y2,z2,ms,loop,repeat)
 animate selected node; loop/repeat string "true" or "false"
 
 # Flow Control
