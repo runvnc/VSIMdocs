@@ -30,7 +30,7 @@ Currently https://reddit.com/r/vsim is the best place to find plugins or post an
 To install a plugin press F5, paste in the plugin URL with Control-V, then hit ENTER.  You will need to restart the program before the plugin will be active.
 
 ## Creating Plugins
-To create a plugin, first make a directory in [VSIM root]/lua/.  Plugins can contain files and/or lua code in init.lua.  You can test your plugin by adding it to the list in the [VSIM root]/plugins file and restarting VSIM.  When it is ready open the console and type plugin_makezip(mydir)[ENTER] where mydir is the subdirectory of [VSIM root]/lua/ (just the folder name, not a full path).  It will create a .7z file in [VSIM root]/lua/plugins/forupload which you can upload to your host.  Then just share the URL for your plugin. 
+To create a plugin, first make a directory in [VSIM root]/lua/.  Plugins can contain files and/or lua code in init.lua.  You can test your plugin by adding it to the list in the [VSIM root]/plugins file and restarting VSIM.  When it is ready open the console and type plugin_makezip("mydir")[ENTER] where mydir is the subdirectory of [VSIM root]/lua/ (just the folder name, not a full path).  It will create a .7z file in [VSIM root]/lua/plugins/forupload which you can upload to your host.  Then just share the URL for your plugin. 
 
 # Emulation
 ## emu.emulate(emulatorid,filetoload)
