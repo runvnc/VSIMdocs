@@ -78,7 +78,7 @@ local mynodeid = model.rez('myhouse.obj')
 change selected node which subsequent commands like pos() and rot() affect
 
 ## VSIM_CAST_SHADOW
-(model.put "true"): selected node casts a shadow (does not work on high-poly meshes
+(model.put "true"): selected node casts a shadow (does not work on high-poly meshes)
 
 ## model.sky(skydomeTextureFname,texturePerc, spherePerc, radius)
 create a sky dome; texturePerc=0..1, spherePerc=0..2
@@ -216,7 +216,16 @@ menutest()
 ```
 # Physics
 ## physics.force(fx,fy,fz,px,py,pz)
-add a force w/dir (fx,fy,fz) and rel. pos (px,py,pz)
+add a force w/dir (fx,fy,fz) and rel. pos (px,py,pz); returns forceid
+
+## physics.delforce(forceid)
+remove force
+
+## physics.deltorque(torqueid)
+remove torque
+
+## physics.torque(tx,ty,tz)
+add a torque around axis tx,ty,tz ; longer vector = greater torque; returns torqueid
 
 ## physics.impulse((fx,fx,yz,px,py,pz)
 apply an impulse given direction and relative position
@@ -224,9 +233,9 @@ apply an impulse given direction and relative position
 ## collision
 Enable collisions by setting this attribute
 
+### enable collision and set mass to 5
 ```lua
-model.put("collision", "gimpact")
-model.put("massinertia",5,0,0,0)
+model.put("collision", "gimpact", 5)
 ```
 # User Interface
 ## ui.screeninp(which)
@@ -290,13 +299,6 @@ HTTP GET and return response body to callback function
 
 ## net.saveurl(url, fname, callback)
 HTTP GET and save response to fname
-
-# Plugins
-## Installing Plugins
-To install a plugin press F5, paste in the plugin URL with Control-V, then hit ENTER.  You will need to restart the program before the plugin will be active.
-
-## Creating Plugins
-To create a plugin, first make a directory in [VSIM root]/lua/ Plugins can contain files and/or lua code in init.lua.  You can test your plugin by adding it to the list in the [VSIM root]/plugins file and restarting VSIM.  When it is ready open the console and type plugin_makezip(mydir)[ENTER] where mydir is the subdirectory of [VSIM root]/lua/.  It will create a zip file in [VSIM root]/lua/plugins/forupload which you can upload to your host.  Then just share the URL for your plugin. 
 
 # Utilities
 ## emucmd(core, argswspaces)
