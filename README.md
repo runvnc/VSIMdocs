@@ -20,6 +20,7 @@ VSIM is a work in progress.  VSIM is currently primarily aimed at programmers wh
 |`Ctrl-F1`|Open help in browser              |
 |`` ` ``   |Toggle Lua console|
 |`1-9` | Zoom and interact with emulator #N|
+|`F7`  | Put zoomed emulator in full screen mode|
 |`Ctrl-F10`|Exit|
 
 ## Finding Plugins
@@ -33,14 +34,14 @@ To install a plugin press F5, paste in the plugin URL with Control-V, then hit E
 To create a plugin, first make a directory in [VSIM root]/lua/.  Plugins can contain files and/or lua code in init.lua.  You can test your plugin by adding it to the list in the [VSIM root]/plugins file and restarting VSIM.  When it is ready open the console and type plugin_makezip("mydir")[ENTER] where mydir is the subdirectory of [VSIM root]/lua/ (just the folder name, not a full path).  It will create a .7z file in [VSIM root]/lua/plugins/forupload which you can upload to your host.  Then just share the URL for your plugin. 
 
 # Emulation
-## emu.emulate(emulatorid,filetoload)
-Run selected emulator (set with emu.core()) with an optional command/rom/binary.
+## emu.emulate(emulatorid,filetoload,tableopts)
+Run selected emulator (set with emu.core()) with an optional command/rom/binary and options table with emulator variable settings.
 NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.  You may run the same core multiple times simultaneously or several different cores depending on system resources.
 
 ### run Top Gear SNES game
 ```lua
 emu.core('snes9x')
-emulatorid = emu.emulate(-1, 'topgear.sfc') 
+emulatorid = emu.emulate(-1, 'topgear.sfc'), vsimcorecfg.snes9x 
 ```
 ## emu.core(fnameNoExt)
 specify the emulator core to use with emulate() commmands
