@@ -343,7 +343,7 @@ function dorot()
   -- note use of substitution with globals table can be useful for constructing
   -- dynamic command strings
   ui.draw(1, "rot ${r}" % _G)
-  -- update text which is index 2 in draw command line
+  -- update text which is index 4 in draw command line
   ui.text(4, r)
 end
 -- animate by updating draw command list every 16 ms
