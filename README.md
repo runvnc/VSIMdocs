@@ -321,6 +321,37 @@ change color values at index
 ## ui.showscreen(num)
 show console (1) or hide (0)
 
+## ui.draw(id, commands)
+add, update or delete draw commands based on Cairo.
+Commands and arguments separated by spaces. id -1 to append, blank command string to delete. Available commands: path (start new path), move x y, line x y, sub (new subpath), end (end sub-path), scale x y, trans x y, save (save state), rest (restore state), arc x y radius degreestart degreeend, curve (cubic Bezier) dx1 dy1 dx2 dy2 dx3 dy3, rot deg, rect x y w h, color r g b a (0..1), fill, stroke (fill/stroke required to actually output shapes). See Cairo documentation and the following examples.
+
+### creates a rotating plus with label indicating degrees rotated
+```lua
+ui.palette(1,0,0,0,0) -- transparent screen (console) background
+ui.cls()
+ui.draw(-1, "trans 200 200")
+ui.draw(-1, "rot 0")
+ui.draw(-1, "trans -25 -25")
+ui.draw(-1, "move 60 0")
+ui.text(-1, "0")
+-- note that stroke and/or fill are required to actually show anything
+ui.draw(-1, "move -50 0 line 50 0 move 0 -50 line 0 50 stroke")
+function dorot()
+  -- use clock for smoother animation
+  r = os.clock() * 50
+  -- modifies the draw command at position 1 (0 is first)
+  -- note use of substitution with globals table can be useful for constructing
+  -- dynamic command strings
+  ui.draw(1, "rot ${r}" % _G)
+  -- update text which is index 2 in draw command line
+  ui.text(4, r)
+end
+-- animate by updating draw command list every 16 ms
+flow.wait(16, 'dorot', 'repeat')
+```
+## ui.text(id, string)
+add,update, or delete a text element at the current x, y coordinate
+
 # Networking
 ## net.geturl(url, callback)
 HTTP GET and return response body to callback function
