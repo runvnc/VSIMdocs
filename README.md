@@ -35,13 +35,13 @@ To create a plugin, first make a directory in [VSIM root]/lua/.  Plugins can con
 
 # Emulation
 ## emu.emulate(emulatorid,filetoload,tableopts)
-Run selected emulator (set with emu.core()) with an optional command/rom/binary and options table with emulator variable settings.
+Run selected emulator (set with emu.core()) with an optional command/rom/binary and options table with emulator variable settings. Note: if there is a cores.cfg file it is parsed by the utils plugin at program start and placed in vsimcorecfg.
 NOTE: YOU MUST HAVE THE REQUIRED ROM OR OTHER FILES INSTALLED IN THE EXPECTED LOCATIONS.  You may run the same core multiple times simultaneously or several different cores depending on system resources.
 
 ### run Top Gear SNES game
 ```lua
 emu.core('snes9x')
-emulatorid = emu.emulate(-1, 'topgear.sfc'), vsimcorecfg.snes9x 
+emulatorid = emu.emulate(-1, 'topgear.sfc', vsimcorecfg.snes9x) 
 ```
 ## emu.core(fnameNoExt)
 specify the emulator core to use with emulate() commmands
@@ -323,8 +323,12 @@ show console (1) or hide (0)
 
 ## ui.draw(id, commands)
 add, update or delete draw commands based on Cairo.
-Commands and arguments separated by spaces. id -1 to append, blank command string to delete. Available commands: path (start new path), move x y, line x y, sub (new subpath), end (end sub-path), scale x y, trans x y, save (save state), rest (restore state), arc x y radius degreestart degreeend, curve (cubic Bezier) dx1 dy1 dx2 dy2 dx3 dy3, rot deg, rect x y w h, color r g b a (0..1), fill, stroke (fill/stroke required to actually output shapes). See Cairo documentation and the following examples.
+Commands and arguments separated by spaces. id -1 to append, blank command string to delete. Available commands: font, size, path (start new path), move x y, line x y, sub (new subpath), end (end sub-path), scale x y, trans x y, save (save state), rest (restore state), arc x y radius degreestart degreeend, curve (cubic Bezier) dx1 dy1 dx2 dy2 dx3 dy3, rot deg, rect x y w h, color r g b a (0..1), fill, stroke (fill/stroke required to actually output shapes). See Cairo documentation and the following examples.
 
+### load and select font from fonts/ dir
+```lua
+ui.draw(-1, "font OpenSans.ttf size 20"
+```
 ### creates a rotating plus with label indicating degrees rotated
 ```lua
 ui.palette(1,0,0,0,0) -- transparent screen (console) background
