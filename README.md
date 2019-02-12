@@ -321,13 +321,20 @@ change color values at index
 ## ui.showscreen(num)
 show console (1) or hide (0)
 
+## ui.filedialog(title, filetypes)
+Open a file dialog and return the selected filename
+
+```lua
+f=ui.filedialog('Choose file', "Any file\0*.*\0"
+```
 ## ui.draw(id, commands)
 add, update or delete draw commands based on Cairo.
 Commands and arguments separated by spaces. id -1 to append, blank command string to delete. Available commands: font, size, path (start new path), move x y, line x y, sub (new subpath), end (end sub-path), scale x y, trans x y, save (save state), rest (restore state), arc x y radius degreestart degreeend, curve (cubic Bezier) dx1 dy1 dx2 dy2 dx3 dy3, rot deg, rect x y w h, color r g b a (0..1), fill, stroke (fill/stroke required to actually output shapes). See Cairo documentation and the following examples.
 
-### load and select font from fonts/ dir
+### load and select font; then change the command list at that index to use a different font
 ```lua
-ui.draw(-1, "font OpenSans.ttf size 20"
+f=ui.draw(-1, "font fonts\\Open_Sans.ttf size 20"
+ui.draw(f, "font MyFont.ttf size 22")
 ```
 ### creates a rotating plus with label indicating degrees rotated
 ```lua
